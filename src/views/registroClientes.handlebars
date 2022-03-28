@@ -1,0 +1,103 @@
+
+<div class="container-fluid align-items-center justify-content-center" style="margin: 1%; margin-left: -0%;  background-color:rgba(0,0,0,1); background: url(http://localhost:3002/app/public/media/ins-bg.jpg) ">
+    <div class="container align-items-center justify-content-center" style="width: 50%; padding: 3%; box-shadow: 3px 3px  5px #b0b435; background-color: white">
+        <h1>Registro Clientes</h1>
+        <form class="needs-validation" novalidate method="post" enctype="application/x-www-form-urlencoded">
+        <div class="row">
+        <div class="mb-3 col">
+            <label for="nombre" name="nombre" class="form-label">Nombres</label>
+            <input type="text" class="form-control" id="nombre" required>
+            <div class="valid-feedback">
+                        Campo Valido
+                 </div>
+                 <div class="invalid-feedback">
+                   Campo sin formato correcto
+                </div>
+        </div>
+        <div class="mb-3 col">
+            <label for="apellido" name="apellido" class="form-label">Apellidos</label>
+            <input type="text" class="form-control" id="apellido" required >
+            <div class="valid-feedback">
+                        Campo Valido
+                 </div>
+                 <div class="invalid-feedback">
+                   Campo sin formato correcto
+                </div>
+        </div>
+        </div>
+         <div class="mb-3">
+            <label for="direccion" class="form-label">Direccion</label>
+            <textarea class="form-control" id="direccion" rows="3" required></textarea>
+            <div class="valid-feedback">
+                        Campo Valido
+                 </div>
+                 <div class="invalid-feedback">
+                   Campo sin formato correcto
+                </div>
+            </div>
+        <div class="row">
+         <div class="mb-3 col">
+            <label for="telefono" name="telefono" class="form-label">Telefono</label>
+            <input type="text" class="form-control" id="telefono" required >
+            <div class="valid-feedback">
+                        Campo Valido
+                 </div>
+                 <div class="invalid-feedback">
+                   Campo sin formato correcto
+                </div>
+        </div>
+        <div class="mb-3 col">
+            <label for="DNI" name="DNI" class="form-label">Identidad</label>
+            <input type="text" class="form-control" id="DNI" required maxlength="13" >
+            <div class="valid-feedback">
+                        Campo Valido
+                 </div>
+                 <div class="invalid-feedback">
+                   Campo sin formato correcto
+                </div>
+        </div>
+        </div>
+        <div class="mb-3">
+				  <label for="email" class="form-label">Correo</label>
+				  <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+				  <div class="valid-feedback">
+                        Campo Valido
+                 </div>
+                 <div class="invalid-feedback">
+                   Campo sin formato correcto
+                </div>
+				</div>
+        <div class="mb-3">
+				  <label for="password" class="form-label">Contraseña</label>
+				  <input type="password" class="form-control" id="password" required>
+                    <div class="valid-feedback">
+                        Campo Valido
+                 </div>
+                 <div class="invalid-feedback">
+                   Campo sin formato correcto
+                </div>
+				</div>
+        <button type="submit" class="btn btn-primary" style="width: 50%; margin-left:25%">Registrarse</button>
+        </form>
+    </div>
+</div>
+    <script>// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})() </script>
