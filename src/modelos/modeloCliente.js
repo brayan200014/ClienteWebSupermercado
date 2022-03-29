@@ -6,10 +6,10 @@ const Cliente= db.define(
     "cliente",
     {
         IdCliente: {
-            type: sequelize.INTEGER, 
-            primarykey: true, 
+            type:sequelize.INTEGER, 
+            primaryKey: true, 
+            autoIncrement: true,
             allowNull: false,
-            autoIncrement: true
         },
         Nombre: {
             type: sequelize.STRING(45),
@@ -39,7 +39,7 @@ const Cliente= db.define(
             type: sequelize.STRING(13),
             allowNull: true
         },
-        contraseña: {
+        contrasenia: {
             type: sequelize.STRING(1000),
             allowNull: false
         },
@@ -53,12 +53,12 @@ const Cliente= db.define(
         timestamps: false,
         hooks: {
             beforeCreate(Cliente) {
-                const hash= bcrypt.hashSync(Cliente.contraseña, 10);
-                Cliente.contraseña= hash;
+                const hash= bcrypt.hashSync(Cliente.contrasenia, 10);
+                Cliente.contrasenia= hash;
             },
             beforeUpdate(Cliente) {
-                const hash= bcrypt.hashSync(Cliente.contraseña, 10);
-                Cliente.contraseña= hash;
+                const hash= bcrypt.hashSync(Cliente.contrasenia, 10);
+                Cliente.contrasenia= hash;
             }
         } 
     }
