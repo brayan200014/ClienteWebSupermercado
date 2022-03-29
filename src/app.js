@@ -15,7 +15,8 @@ app.set('views', './src/views');
 //Rutas
 app.use('/app/public', express.static(path.join(__dirname, 'public/')));
 app.use('/app', require('./rutas/index'));
+app.use('/app/productos', require('./rutas/rutasProductos'));
 
-app.listen(app.get('port'), () => {
-    console.log('Servidor iniciado en el puerto 3002');
+app.listen(6001, () => {
+    console.log('Servidor iniciado en el puerto 6001');
 });
