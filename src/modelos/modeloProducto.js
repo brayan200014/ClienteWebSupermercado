@@ -2,7 +2,7 @@ const sequelize  =  require('sequelize');
 const db = require('../configuraciones/db');
 const Categorias= require('../modelos/modeloCategorias')
 
-const Producto = db.define("producto",
+const Productos = db.define("producto",
 {
     IdProducto:{
         type: sequelize.INTEGER,
@@ -33,11 +33,11 @@ const Producto = db.define("producto",
     }
 },
 {
-    tableName: "productos",
+    tableName: "Productos",
     timestamps : false,
 }
 
 );
 
-Categorias.hasOne(Producto, {foreignKey: 'Categorias_IdCategoria'});
-module.exports=Producto;
+Categorias.hasOne(Productos, {foreignKey: 'Categorias_IdCategoria'});
+module.exports=Productos;
