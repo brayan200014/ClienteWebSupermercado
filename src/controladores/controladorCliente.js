@@ -5,7 +5,8 @@ const render= require('express/lib/response');
 
 
 exports.inicio= (req, res)=> {
-    res.render('registroClientes')
+    const {guardar, existe, validacion}= req.query;
+    res.render('registroClientes', {guardar:guardar, existe: existe, validacion:validacion});
 }
 
 exports.guardarCliente=async (req,res)=> {
@@ -13,17 +14,17 @@ exports.guardarCliente=async (req,res)=> {
 
     if(!validacion.isEmpty()) {
         console.log(validacion.array());
-       res.render('registroClientes', {validacion:validacion.array()})
-      // msj("No valido vali", 200, validacion.array(), res);
+        const data= {
+            validacion: validacion.array()
+        }
+       msj("No valido vali", 200, data, res);
     }
     else 
     {
         const {nombre,apellido,telefono,email,identidad,contrasenia, direccion, rtn}= req.body; 
 
         if(!nombre || !apellido || !telefono || !email || !identidad || !contrasenia) {
-          res.render('registroCliente', {valinull:"Envie los datos completos"});
-           console.log("Rellene los campos");
-          // msj("No valido datos", 200, [nombre,apellido, telefono,email,identidad,contrasenia,direccion], res);
+           msj("No valido datos", 200, [nombre,apellido, telefono,email,identidad,contrasenia,direccion], res);
         }
         else 
         {
@@ -32,14 +33,28 @@ exports.guardarCliente=async (req,res)=> {
                     Email: email
                 }
             })
+            
 
             if(buscarCliente) {
               // res.render('registroCliente', {validacion:"Ya existe un cliente registrado con ese correo"});
                console.log("Ya existe un correo")
-               res.render('registroClientes', {existe: true});
+               const data= {
+                   error: true
+               }
+               msj("Ya existe un mismo correo registrado", 200,data, res);
             }
             else 
             {
+                const data= {
+                    Nombre: nombre,
+                    Apellido: apellido,
+                    Telefono: telefono,
+                    Direccion: direccion,
+                    Email: email, 
+                    Identidad: identidad,
+                    RTN: rtn,
+                    contrasenia: contrasenia
+                }
                 await modeloCliente.create({
                     Nombre: nombre,
                     Apellido: apellido,
@@ -49,8 +64,8 @@ exports.guardarCliente=async (req,res)=> {
                     Identidad: identidad,
                     RTN: rtn,
                     contrasenia: contrasenia
-                }).then((data)=> {
-                   res.render('registroClientes', {guardar: true});
+                }).then((result)=> {
+                   msj("Registro guardado exitosamente", 200, data,res);
                 }).catch((error) => {
                     console.log(error);
                 })
