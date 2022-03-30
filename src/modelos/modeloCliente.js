@@ -21,11 +21,11 @@ const Cliente= db.define(
         },
         Telefono: {
             type: sequelize.STRING(15),
-            allowNull: false
+            allowNull: true
         },
         Direccion: {
             type: sequelize.STRING(150),
-            allowNull: false
+            allowNull: true
         },
         Email: {
             type: sequelize.STRING(60),

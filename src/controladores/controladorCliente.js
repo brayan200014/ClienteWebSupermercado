@@ -58,3 +58,45 @@ exports.guardarCliente=async (req,res)=> {
         }
     }
 }
+
+//MODIFICAR REGISTRO CLIENTES
+exports.modificarCliente = async (req, res) => {
+    const {IdCliente} = req.query;
+    const {Nombre, Apellido, Telefono, Direccion, Email, Identidad, RTN, contrasenia} = req.body;
+    if(!Nombre || !Apellido || !Email || !Identidad){
+        res.send("Por favor envie los datos completos");
+    }
+    else{
+        var busquedaCliente = await modeloCliente.findOne({
+            where:{
+
+                IdCliente:IdCliente,  
+            }
+        });
+        if(!busquedaCliente){
+            res.send("Lo sentimos...El cliente no existe");
+        }
+        else{
+            busquedaCliente.Nombre=Nombre;
+            busquedaCliente.Apellido=Apellido;                   
+            busquedaCliente.Telefono=Telefono;                   
+            busquedaCliente.Direccion=Direccion;                   
+            busquedaCliente.Email=Email;
+            busquedaCliente.Identidad=Identidad;
+            busquedaCliente.RTN=RTN;
+            busquedaCliente.contrasenia=contrasenia;
+            await busquedaCliente.save()
+            .then((data) => {
+                console.log(data);
+                res.send("Registro modificado");
+                
+            })
+            .catch((error) => {
+                console.log(error);
+                res.send("Error al querer modificar los datos");
+
+            });
+        }
+    }
+};
+
