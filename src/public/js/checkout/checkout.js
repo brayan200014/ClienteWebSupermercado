@@ -20,6 +20,26 @@ var datos = [
 ]
 
 const shoppingCartList = document.querySelector('#shoppingCartList');
+const btnInsertSale = document.querySelector('#btnInsertSale').addEventListener('click', insertSale);
+
+var data = {
+    "subtotal": 200,
+    "isv": 0.15,
+    "clientId": 1,
+    "sucursalId": 1,
+    "detalleVenta": [
+        {
+            "Productos_IdProducto": 1,
+            "Cantidad": 2,
+            "PrecioVenta": 100
+        },
+        {
+            "Productos_IdProducto": 3,
+            "Cantidad": 2,
+            "PrecioVenta": 100
+        }
+    ]
+};
 
 //Calls functions
 insertShoppingCart()
@@ -47,4 +67,20 @@ function insertShoppingCart(){
     qryTotal.innerHTML = "$ " + (subTotal + (subTotal * 0.15));
 }
 
+function insertSale(){
+    var url = 'http://localhost:3002/app/ventas/guardar';
 
+    fetch(url, {
+    method: 'POST', // or 'PUT'
+    body: JSON.stringify(data), // data can be `string` or {object}!
+    headers:{
+        'Content-Type': 'application/json'
+    }
+    })
+    .then(
+        res => res.json()
+    )
+    .catch(
+        error => console.error('Error:', error)
+    )
+}
