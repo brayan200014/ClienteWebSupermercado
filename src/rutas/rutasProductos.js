@@ -4,4 +4,6 @@ const router = Router();
 
 router.get('/listarproductos', controladorProductos.listarproductos);
 router.get('/cargarproductos', controladorProductos.cargarProductos);
+
+router.get('/detalleproducto', controladorProductos.detalle);
 module.exports=router;

@@ -14,19 +14,19 @@ function displayProducts(){
                 <div class="type-lb">
                     <p class="sale">Sale</p>
                 </div>
-                <img src="../public/media/img-pro-02.jpg" class="img-fluid" alt="Image">
+                <img src="http://192.168.0.146:3002/app/archivos/consultar?id=${item.IdProducto}" class="img-fluid" alt="Image">
                 <div class="mask-icon">
                     <ul>
                         <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
                         <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
                         <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                     </ul>
-                    <a class="cart" href="#">Add to Cart</a>
+                    <a class="cart" href="http://localhost:3002/app/productos/detalleproducto?id=${item.IdProducto}&nombre=${item.NombreProducto}&dsc=${item.DescripcionProducto}&precio=${item.PrecioVenta}">Ver Detalle</a>
                 </div>
             </div>
             <div class="why-text">
                 <h4>${item.NombreProducto}</h4>
-                <h5> ${item.IdProducto}</h5>
+                <h5> ${item.PrecioVenta}</h5>
             </div>
         </div>
     </div>
