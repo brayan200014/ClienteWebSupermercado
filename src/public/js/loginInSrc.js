@@ -83,7 +83,7 @@ const cambiarContra= async () => {
          event.preventDefault()
 
 
-          var correo= document.getElementById('email');
+          var correo= localStorage.getItem('correoPin');
           var pin= document.getElementById('pin');
           var contrasenia= document.getElementById('contrasenia');
           var confirmCon= document.getElementById('confirm');
@@ -100,7 +100,7 @@ const cambiarContra= async () => {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            correo: correo.value,
+                            correo: correo,
                             contrasenia: contrasenia.value,
                             pin: pin.value
                         })
@@ -175,6 +175,7 @@ const cambiarContra= async () => {
                 window.location.assign('http://localhost:3002/app/loginIn/recovery?existe=true');
             }
             else if(answer.correo) {
+              localStorage.setItem('correoPin',answer.correo); 
                 window.location.assign('http://localhost:3002/app/loginIn/recovery?send=true');
             } 
             
