@@ -62,7 +62,8 @@ function agregarCarrito(){
     localStorage.setItem('precio', JSON.stringify(precio));
     localStorage.setItem('cantidad', JSON.stringify(cantidad));
     canti.value = 1;
-    alert("Producto Agregado al Carrito Exitosamente.")
+    swal("Carrito", "Producto Agregado al Carrito Exitosamente!", "success");
+    //alert("Producto Agregado al Carrito Exitosamente.")
 }
 
 
