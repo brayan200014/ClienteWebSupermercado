@@ -26,7 +26,7 @@ function displayProducts(){
             </div>
             <div class="why-text">
                 <h4>${item.NombreProducto}</h4>
-                <h5> ${item.PrecioVenta}</h5>
+                <h5>LPS.${item.PrecioVenta}</h5>
             </div>
         </div>
     </div>
