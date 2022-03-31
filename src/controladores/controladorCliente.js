@@ -9,6 +9,11 @@ exports.inicio= (req, res)=> {
     res.render('registroClientes', {guardar:guardar, existe: existe, validacion:validacion});
 }
 
+exports.modificar= (req, res)=> {
+    const {modificar, existe, validacion}= req.query;
+    res.render('modificarClientes', {modificar:modificar, existe: existe, validacion:validacion});
+}
+
 exports.guardarCliente=async (req,res)=> {
     const validacion= validationResult(req); 
 
@@ -76,10 +81,22 @@ exports.guardarCliente=async (req,res)=> {
 
 //MODIFICAR REGISTRO CLIENTES
 exports.modificarCliente = async (req, res) => {
+
+    const validacion= validationResult(req); 
+
+    if(!validacion.isEmpty()) {
+        console.log(validacion.array());
+        const data= {
+            validacion: validacion.array()
+        }
+       msj("No valido vali", 200, data, res);
+    }
+    else 
+    {
     const {IdCliente} = req.query;
     const {Nombre, Apellido, Telefono, Direccion, Email, Identidad, RTN, contrasenia} = req.body;
-    if(!Nombre || !Apellido || !Email || !Identidad){
-        res.send("Por favor envie los datos completos");
+    if(!Nombre || !Apellido ||!Telefono ||!Direccion || !Email || !Identidad ||!contrasenia){
+        msj("No valido datos", 200, [Nombre,Apellido, Telefono,Email,Identidad,contrasenia,Direccion], res);
     }
     else{
         var busquedaCliente = await modeloCliente.findOne({
@@ -103,7 +120,7 @@ exports.modificarCliente = async (req, res) => {
             await busquedaCliente.save()
             .then((data) => {
                 console.log(data);
-                res.send("Registro modificado");
+                msj("Registro modificado exitosamente", 200, data,res);
                 
             })
             .catch((error) => {
@@ -113,5 +130,6 @@ exports.modificarCliente = async (req, res) => {
             });
         }
     }
+}
 };
 

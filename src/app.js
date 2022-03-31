@@ -13,6 +13,7 @@ app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './src/views');
 
+
 //Rutas
 app.use('/app/public', express.static(path.join(__dirname, 'public/')));
 app.use('/app', require('./rutas/index'));
