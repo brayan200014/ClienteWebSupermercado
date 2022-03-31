@@ -17,6 +17,7 @@ app.use('/app/public', express.static(path.join(__dirname, 'public/')));
 app.use('/app', require('./rutas/index'));
 app.use('/app/productos', require('./rutas/rutasProductos'));
 app.use('/app/archivos', require('./rutas/rutasArchivos')); 
+app.use('/app/Carrito', require('./rutas/rutasCarritos'));
 
 app.listen(app.get('port'), () => {
     console.log('Servidor iniciado en el puerto 3002');

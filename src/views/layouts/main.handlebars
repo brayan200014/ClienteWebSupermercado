@@ -90,7 +90,7 @@
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                         <li class="nav-item active"><a class="nav-link" href="http://localhost:3002/app/">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="productos/listarproductos">Tienda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="http://localhost:3002/app/productos/listarproductos">Tienda</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -100,7 +100,7 @@
                     <ul>
                         <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                         <li class="side-menu">
-							<a href="#">
+							<a href="#" onclick="mostrarCarrito()">
 								<i class="fa fa-shopping-bag"></i>
 								<span class="badge">3</span>
 								<p>Mi Carrito</p>
@@ -114,8 +114,8 @@
             <div class="side">
                 <a href="#" class="close-side"><i class="fa fa-times"></i></a>
                 <li class="cart-box">
-                    <ul class="cart-list">
-                        <li>
+                    <ul class="cart-list" id="cart-list">
+                        <!--<li>
                             <a href="#" class="photo"><img src="http://localhost:3002/app/public/media/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
                             <h6><a href="#">Delica omtantur </a></h6>
                             <p>1x - <span class="price">$80.00</span></p>
@@ -130,10 +130,10 @@
                             <h6><a href="#">Agam facilisis</a></h6>
                             <p>1x - <span class="price">$40.00</span></p>
                         </li>
-                        <li class="total">
-                            <a href="#" class="btn btn-default hvr-hover btn-cart">Ver carrito</a>
+                        <li class="total" style="margin-top: 0%;">
+                            <a href="#" class="btn btn-default hvr-hover btn-cart" onclick="mostrarCarrito()">Ver carrito</a>
                             <span class="float-right"><strong>Total</strong>: $180.00</span>
-                        </li>
+                        </li>-->
                     </ul>
                 </li>
             </div>
@@ -316,7 +316,7 @@
     <script src="http://localhost:3002/app/public/js/form-validator.min.js"></script>
     <script src="http://localhost:3002/app/public/js/contact-form-script.js"></script>
     <script src="http://localhost:3002/app/public/js/custom.js"></script>
-    
+    <script src="http://localhost:3002/app/public/js/productos/carritoVisualizar.js"></script>
 </body>
 
 </html>

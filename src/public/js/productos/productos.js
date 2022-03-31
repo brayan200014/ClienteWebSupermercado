@@ -14,7 +14,7 @@ function displayProducts(){
                 <div class="type-lb">
                     <p class="sale">Sale</p>
                 </div>
-                <img src="http://192.168.0.146:3002/app/archivos/consultar?id=${item.IdProducto}" class="img-fluid" alt="Image">
+                <img src="http://192.168.0.11:3002/app/archivos/consultar?id=${item.IdProducto}" class="img-fluid" alt="Image">
                 <div class="mask-icon">
                     <ul>
                         <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
