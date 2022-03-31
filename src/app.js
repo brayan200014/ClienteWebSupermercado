@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
@@ -12,11 +13,15 @@ app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './src/views');
 
+
 //Rutas
 app.use('/app/public', express.static(path.join(__dirname, 'public/')));
 app.use('/app', require('./rutas/index'));
 app.use('/app/productos', require('./rutas/rutasProductos'));
 app.use('/app/archivos', require('./rutas/rutasArchivos')); 
+app.use('/app/loginIn', require('./rutas/rutaLogin'));
+app.use('/app/clientes', require('./rutas/rutaClientes'));
+
 
 app.listen(app.get('port'), () => {
     console.log('Servidor iniciado en el puerto 3002');
