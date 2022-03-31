@@ -77,24 +77,11 @@
             }
           )
   
-          /*const info= await respuesta.json();
-          const answer= info.data; 
-          if(answer.Nombre) {
-              window.location.assign('http://localhost:3002/app/clientes/modificarCliente?IdCliente')
-          }
-          else if(!Nombre.value || !Apellido.value || !Telefono.value || !Identidad.value || !Direccion.value || !contrasenia.value || !Email.value)
-          {
-  
-          }
-          else if(answer.validacion)
-          {
-              window.location.assign('http://localhost:3002/app/clientes?validacion=true')
-          }*/
-  
-  
+          swal("Registro Modificado!", "Tus datos de registro han sido modificados con Exito!", "success");
   
         }, false)
       })
 })() 
+
 
 
