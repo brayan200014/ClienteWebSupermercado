@@ -78,8 +78,9 @@
           )
   
           swal("Registro Modificado!", "Tus datos de registro han sido modificados con Exito!", "success");
-  
+         
         }, false)
+        
       })
 })() 
 
