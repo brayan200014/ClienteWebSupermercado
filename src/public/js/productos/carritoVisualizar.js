@@ -72,7 +72,7 @@ function mostrarCarrito(){
         subtotal += cantidad[i] * precio[i];
         addcar.innerHTML += `
         <li>
-            <a href="#" class="photo"><img src="http://192.168.0.11:3002/app/archivos/consultar?id=${id[i]}" class="cart-thumb" alt="" /></a>
+            <a href="#" class="photo"><img src="http://localhost:3002/app/archivos/consultar?id=${id[i]}" class="cart-thumb" alt="" /></a>
             <h6><a href="#">${nombre[i]}</a></h6>
             <p>${cantidad[i]}x - <span class="price">L${precio[i]}</span></p>
          </li>
