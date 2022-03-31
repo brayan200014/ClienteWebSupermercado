@@ -90,9 +90,9 @@
                 </div>
         </div>
         </div>
-        <div class="mb-3">
-				  <label for="Email" class="form-label">Correo</label>
-				  <input type="email" class="form-control" id="Email"   aria-describedby="emailHelp" required pattern="/^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/">
+         <div class="mb-3">
+				  <label for="RTN" class="form-label">RTN</label>
+				  <input type="text" class="form-control" id="RTN"  pattern="^[0-9]*$" maxlength="14" minlength="14">
 				  <div class="valid-feedback">
                         Campo Valido
                  </div>
@@ -101,13 +101,13 @@
                 </div>
 				</div>
         <div class="mb-3">
-				  <label for="password" class="form-label">Contraseña</label>
-				  <input type="password" class="form-control" id="contrasenia"  required pattern="^(?=.{6,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$" minlength="6" maxlength="15">
-                    <div class="valid-feedback">
+				  <label for="Email" class="form-label">Correo</label>
+				  <input type="email" class="form-control" id="Email"   aria-describedby="emailHelp" required pattern="/^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/">
+				  <div class="valid-feedback">
                         Campo Valido
                  </div>
                  <div class="invalid-feedback">
-                   Debe ingresar contraseña de minimo 6 digitos, incluir mayusculas, minisculas, digitos y caracteres
+                   Campo sin formato correcto
                 </div>
 				</div>
         <button type="submit" class="btn btn-primary" style="width: 50%; margin-left:25%" >Modificar Registro</button>

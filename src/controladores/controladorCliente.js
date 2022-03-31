@@ -14,6 +14,31 @@ exports.modificar= (req, res)=> {
     res.render('modificarClientes', {modificar:modificar, existe: existe, validacion:validacion});
 }
 
+
+exports.buscar= async (req,res) => {
+
+    const {userId} =req.query;
+    if(!userId){
+        res.send("No enviar Id vacio");
+    }
+    else{
+        const buscarCliente = await modeloCliente.findOne({
+            where:{
+                IdCliente: userId
+            }
+        });
+    
+        //validacion
+        if(!buscarCliente)
+        {
+            res.send("No se encontraron registros");
+        }
+        else{
+            res.json(buscarCliente);
+        }
+    }
+ };
+
 exports.guardarCliente=async (req,res)=> {
     const validacion= validationResult(req); 
 
@@ -94,9 +119,9 @@ exports.modificarCliente = async (req, res) => {
     else 
     {
     const {IdCliente} = req.query;
-    const {Nombre, Apellido, Telefono, Direccion, Email, Identidad, RTN, contrasenia} = req.body;
-    if(!Nombre || !Apellido ||!Telefono ||!Direccion || !Email || !Identidad ||!contrasenia){
-        msj("No valido datos", 200, [Nombre,Apellido, Telefono,Email,Identidad,contrasenia,Direccion], res);
+    const {Nombre, Apellido, Telefono, Direccion, Email, Identidad, RTN} = req.body;
+    if(!Nombre || !Apellido ||!Telefono ||!Direccion || !Email || !Identidad ){
+        msj("No valido datos", 200, [Nombre, Apellido, Telefono, Email, Identidad, Direccion], res);
     }
     else{
         var busquedaCliente = await modeloCliente.findOne({
@@ -116,7 +141,7 @@ exports.modificarCliente = async (req, res) => {
             busquedaCliente.Email=Email;
             busquedaCliente.Identidad=Identidad;
             busquedaCliente.RTN=RTN;
-            busquedaCliente.contrasenia=contrasenia;
+
             await busquedaCliente.save()
             .then((data) => {
                 console.log(data);

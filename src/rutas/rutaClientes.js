@@ -6,8 +6,8 @@ const { route } = require('.');
 const controladorCliente= require('../controladores/controladorCliente');
 const { body , query }= require('express-validator');
 
-//router.get('/', controladorCliente.inicio);
-router.get('/', controladorCliente.modificar);
+router.get('/', controladorCliente.inicio);
+router.get('/modificar', controladorCliente.modificar);
 router.post('/guardarCliente', body('nombre').isLength({min:3}).withMessage("La longitud minima del es 3"),
 body('apellido').isLength({min:3}).withMessage("La longitud minima del es 3"),
 body('telefono').isLength({min:8}).withMessage("Enviar un telefono valido"),
@@ -18,6 +18,6 @@ body('contrasenia').isLength({min:6, max:15}).withMessage('La longitud mínima d
 controladorCliente.guardarCliente);
 
 router.put('/modificarCliente', controladorCliente.modificarCliente);
-
+router.get('/listar', controladorCliente.buscar);
 
 module.exports= router;
