@@ -5,4 +5,8 @@ router.get('/', (req, res) => {
     res.render("Home");
 })
 
+router.get('/iniciomodificar', (req, res) => {
+    res.render("IniciomiCuenta");
+})
+
 module.exports = router;

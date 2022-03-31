@@ -20,6 +20,7 @@ app.use('/app', require('./rutas/index'));
 app.use('/app/loginIn', require('./rutas/rutaLogin'));
 app.use('/app/clientes', require('./rutas/rutaClientes'));
 
+
 app.listen(app.get('port'), () => {
     console.log('Servidor iniciado en el puerto 3002');
 });
