@@ -15,7 +15,7 @@ var data = {
     "subtotal": 0,
     "isv": 0.15,
     "clientId": parseInt(JSON.parse(sessionStorage.getItem('userId'))),
-    "sucursalId": 1,
+    "sucursalId": 0,
     "detalleVenta": []
 };
 
@@ -67,37 +67,65 @@ function insertShoppingCart(){
     data.subtotal = subTotal;
 }
 
-function insertSale(){
+async function insertSale(){
     var url = 'http://localhost:3002/app/ventas/guardar';
 
     data.detalleVenta = datos;
     data.sucursalId = selectSucursal.value;
 
-    fetch(url, {
-    method: 'POST', // or 'PUT'
-    body: JSON.stringify(data), // data can be `string` or {object}!
-    headers:{
-        'Content-Type': 'application/json'
+    console.log(data.clientId);
+    if(selectSucursal.value != "Choose..."){
+        if(data.clientId){
+            await fetch(url, {
+                method: 'POST', // or 'PUT'
+                body: JSON.stringify(data), // data can be `string` or {object}!
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(
+                res => {
+                    res.json();
+
+                    //Limpiar 
+                    localStorage.setItem('id', '');
+                    localStorage.setItem('nombre', '');
+                    localStorage.setItem('precio', '');
+                    localStorage.setItem('cantidad', '');
+                
+                    swal({
+                        title: "¡Compra procesada!",
+                        text: "Tu compra fue procesada con exito.",
+                        type: "success"
+                    }).then(function() {
+                        window.location.href = 'http://localhost:3002/app';
+                    });
+                }
+            )
+            .catch(
+                error => {
+                    console.error('Error:', error);
+                    swal({
+                        title: "¡Error al procesar la compra!",
+                        text: "Tu compra no pudo ser procesada, intenta de nuevo.",
+                        type: "success"
+                    });
+                }
+            )
+        }
+        else{
+            swal({
+                title: "¡Error!",
+                text: "No has iniciado sesion.",
+                type: "success"
+            })
+        }
     }
-    })
-    .then(
-        res => res.json()
-    )
-    .catch(
-        error => console.error('Error:', error)
-    )
-
-    //Limpiar 
-    localStorage.setItem('id', '');
-    localStorage.setItem('nombre', '');
-    localStorage.setItem('precio', '');
-    localStorage.setItem('cantidad', '');
-
-    swal({
-        title: "Compra procesada!",
-        text: "Tu compra fue procesada con exito!",
-        type: "success"
-    }).then(function() {
-        window.location.href = 'http://localhost:3002/app';
-    });
+    else{
+        swal({
+            title: "¡Error!",
+            text: "No has seleccionado la sucursal.",
+            type: "success"
+        })
+    }
 }
