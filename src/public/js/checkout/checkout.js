@@ -1,48 +1,46 @@
+const shoppingCartList = document.querySelector('#shoppingCartList');
+const btnInsertSale = document.querySelector('#btnInsertSale').addEventListener('click', insertSale);
+const selectSucursal = document.querySelector('#sucursal');
+
 var datos = [
     {
-        id: 1,
-        nombre: 'Lechuga',
-        precio: 200,
-        cantidad: 2 
-    },
-    {
-        id: 2,
-        nombre: 'Tomates',
-        precio: 10,
-        cantidad: 5
-    },
-    {
-        id: 2,
-        nombre: 'Tomates',
-        precio: 10,
-        cantidad: 5
+        Productos_IdProducto: 0,
+        NombreProducto: '',
+        PrecioVenta: 0,
+        Cantidad: 0 
     }
 ]
 
-const shoppingCartList = document.querySelector('#shoppingCartList');
-const btnInsertSale = document.querySelector('#btnInsertSale').addEventListener('click', insertSale);
-
 var data = {
-    "subtotal": 200,
+    "subtotal": 0,
     "isv": 0.15,
-    "clientId": 1,
+    "clientId": parseInt(JSON.parse(sessionStorage.getItem('userId'))),
     "sucursalId": 1,
-    "detalleVenta": [
-        {
-            "Productos_IdProducto": 1,
-            "Cantidad": 2,
-            "PrecioVenta": 100
-        },
-        {
-            "Productos_IdProducto": 3,
-            "Cantidad": 2,
-            "PrecioVenta": 100
-        }
-    ]
+    "detalleVenta": []
 };
 
 //Calls functions
-insertShoppingCart()
+extractShopingCart();
+insertShoppingCart();
+
+function extractShopingCart(){
+    var shoppingCartId = [];
+    var shoppingCartNombre = [];
+    var shoppingCartPrecio = [];
+    var shoppingCartCantidad = [];
+
+    shoppingCartId = JSON.parse(localStorage.getItem('id'));
+    shoppingCartNombre = JSON.parse(localStorage.getItem('nombre'));
+    shoppingCartPrecio = JSON.parse(localStorage.getItem('precio'));
+    shoppingCartCantidad = JSON.parse(localStorage.getItem('cantidad'));
+
+    for(let i = 0; i<shoppingCartId.length; i++ ){
+        datos[i].Productos_IdProducto = shoppingCartId[i];
+        datos[i].NombreProducto = shoppingCartNombre[i];
+        datos[i].PrecioVenta = shoppingCartPrecio[i];
+        datos[i].Cantidad = shoppingCartCantidad[i];
+    }
+}
 
 function insertShoppingCart(){
     shoppingCartList.innerHTML = '';
@@ -51,24 +49,29 @@ function insertShoppingCart(){
     for(let item of datos){
         shoppingCartList.innerHTML += `
             <div class="media mb-2 border-bottom">
-                <div class="media-body"> <a href="#">${item.nombre}</a>
-                    <div class="small text-muted">Precio: $${item.precio} <span class="mx-2">|</span> Cantidad: ${item.cantidad} <span class="mx-2">|</span> Subtotal: $${item.cantidad * item.precio}</div>
+                <div class="media-body"> <a href="#">${item.NombreProducto}</a>
+                    <div class="small text-muted">Precio: $${item.PrecioVenta} <span class="mx-2">|</span> Cantidad: ${item.Cantidad} <span class="mx-2">|</span> Subtotal: $${item.Cantidad * item.PrecioVenta}</div>
                 </div>
             </div>
-        `
-        subTotal += item.cantidad * item.precio;
+        `;
+        subTotal += item.Cantidad * item.PrecioVenta;
     }
 
     const qrySubtotal = document.querySelector('#coSubtotal');
-    qrySubtotal.innerHTML = "$ " + subTotal;
+    qrySubtotal.innerHTML = "$ " + (subTotal - (subTotal * 0.15)).toFixed(2);
     const qryIsv = document.querySelector('#coIsv');
-    qryIsv.innerHTML = "$ " + subTotal * 0.15;
+    qryIsv.innerHTML = "$ " + (subTotal * 0.15).toFixed(2);
     const qryTotal = document.querySelector('#coTotal');
-    qryTotal.innerHTML = "$ " + (subTotal + (subTotal * 0.15));
+    qryTotal.innerHTML = "$ " + (subTotal).toFixed(2);
+
+    data.subtotal = subTotal;
 }
 
 function insertSale(){
     var url = 'http://localhost:3002/app/ventas/guardar';
+
+    data.detalleVenta = datos;
+    data.sucursalId = selectSucursal.value;
 
     fetch(url, {
     method: 'POST', // or 'PUT'
@@ -83,4 +86,18 @@ function insertSale(){
     .catch(
         error => console.error('Error:', error)
     )
+
+    //Limpiar 
+    localStorage.setItem('id', '');
+    localStorage.setItem('nombre', '');
+    localStorage.setItem('precio', '');
+    localStorage.setItem('cantidad', '');
+
+    swal({
+        title: "Compra procesada!",
+        text: "Tu compra fue procesada con exito!",
+        type: "success"
+    }).then(function() {
+        window.location.href = 'http://localhost:3002/app';
+    });
 }
