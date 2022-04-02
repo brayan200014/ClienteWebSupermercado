@@ -5,7 +5,7 @@ const cost = document.getElementById('cost');
 const ide = document.getElementById('ide');
 //const loadCar = document.getElementById('productosCargar');
 
-let id = [];
+let id = null;
 let nombre = [];
 let precio = [];
 let cantidad = [];
@@ -15,6 +15,14 @@ function agregarCarrito(){
 
     var valor = 0;
     var bandera = false;
+
+    if(id == null)
+    {
+        localStorage.setItem('id', JSON.stringify([]));
+        localStorage.setItem('nombre', JSON.stringify([]));
+        localStorage.setItem('precio', JSON.stringify([]));
+        localStorage.setItem('cantidad', JSON.stringify([]));   
+    }
 
     id = JSON.parse(localStorage.getItem('id'));
     nombre = JSON.parse(localStorage.getItem('nombre'));
@@ -54,7 +62,8 @@ function agregarCarrito(){
     localStorage.setItem('precio', JSON.stringify(precio));
     localStorage.setItem('cantidad', JSON.stringify(cantidad));
     canti.value = 1;
-    alert("Producto Agregado al Carrito Exitosamente.")
+    swal("Carrito", "Producto Agregado al Carrito Exitosamente!", "success");
+    //alert("Producto Agregado al Carrito Exitosamente.")
 }
 
 

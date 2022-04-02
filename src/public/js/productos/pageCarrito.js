@@ -36,7 +36,7 @@ function mostrarCarritoPrincipal() {
         <tr>
         <td class="thumbnail-img">
             <a href="#">
-                <img class="img-fluid" src="http://192.168.0.11:3002/app/archivos/consultar?id=${id[i]}" alt="" />
+                <img class="img-fluid" src="http://localhost:3002/app/archivos/consultar?id=${id[i]}" alt="" />
                 <input type="hidden" name="identificador" value="${id[i]}">
             </a>
         </td>
