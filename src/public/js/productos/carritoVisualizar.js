@@ -5,7 +5,7 @@ const cost = document.getElementById('cost');
 const ide = document.getElementById('ide');
 //const loadCar = document.getElementById('productosCargar');
 
-let id = null;
+let id = [];
 let nombre = [];
 let precio = [];
 let cantidad = [];
@@ -23,7 +23,7 @@ function agregarCarrito(){
         localStorage.setItem('precio', JSON.stringify([]));
         localStorage.setItem('cantidad', JSON.stringify([]));   
     }
-
+    
     id = JSON.parse(localStorage.getItem('id'));
     nombre = JSON.parse(localStorage.getItem('nombre'));
     precio = JSON.parse(localStorage.getItem('precio'));
@@ -36,7 +36,7 @@ function agregarCarrito(){
         precio.push(cost.value);
         cantidad.push(canti.value);
     }
-    else
+    else if(id.length > 0)
     {
         bandera = false;
 
