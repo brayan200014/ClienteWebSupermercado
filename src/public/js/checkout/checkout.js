@@ -3,12 +3,12 @@ const btnInsertSale = document.querySelector('#btnInsertSale').addEventListener(
 const selectSucursal = document.querySelector('#sucursal');
 
 var datos = [
-    {
+    /*{
         Productos_IdProducto: 0,
         NombreProducto: '',
         PrecioVenta: 0,
         Cantidad: 0 
-    }
+    }*/
 ]
 
 var data = {
@@ -35,10 +35,19 @@ function extractShopingCart(){
     shoppingCartCantidad = JSON.parse(localStorage.getItem('cantidad'));
 
     for(let i = 0; i<shoppingCartId.length; i++ ){
-        datos[i].Productos_IdProducto = shoppingCartId[i];
+        var product = {
+            Productos_IdProducto: shoppingCartId[i],
+            NombreProducto: shoppingCartNombre[i],
+            PrecioVenta: shoppingCartPrecio[i],
+            Cantidad: shoppingCartCantidad[i]
+        }
+
+        datos.push(product);
+        
+        /*datos[i].Productos_IdProducto = shoppingCartId[i];
         datos[i].NombreProducto = shoppingCartNombre[i];
         datos[i].PrecioVenta = shoppingCartPrecio[i];
-        datos[i].Cantidad = shoppingCartCantidad[i];
+        datos[i].Cantidad = shoppingCartCantidad[i];*/
     }
 }
 
@@ -73,7 +82,6 @@ async function insertSale(){
     data.detalleVenta = datos;
     data.sucursalId = selectSucursal.value;
 
-    console.log(data.clientId);
     if(selectSucursal.value != "Choose..."){
         if(data.clientId){
             await fetch(url, {
@@ -88,10 +96,10 @@ async function insertSale(){
                     res.json();
 
                     //Limpiar 
-                    localStorage.setItem('id', '');
-                    localStorage.setItem('nombre', '');
-                    localStorage.setItem('precio', '');
-                    localStorage.setItem('cantidad', '');
+                    localStorage.removeItem('id');
+                    localStorage.removeItem('nombre');
+                    localStorage.removeItem('precio');
+                    localStorage.removeItem('cantidad');
                 
                     swal({
                         title: "¡Compra procesada!",
